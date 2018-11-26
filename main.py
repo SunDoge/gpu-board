@@ -5,6 +5,7 @@ from gpustat import new_query
 import config
 import socketio
 from sanic import Sanic, response
+import ujson
 
 app = Sanic()
 sio = socketio.AsyncServer(async_mode='sanic')
@@ -23,10 +24,11 @@ async def update_gpu_stats():
         if len(sio.manager.rooms) > 0:
             gpu_stats = new_query()
             # print(gpu_stats.jsonify())
-            await sio.emit('gpustat', gpu_stats.jsonify())
+            gpu_stats_json = ujson.dumps(gpu_stats.jsonify())
+            await sio.emit('gpustat', gpu_stats_json)
         # print(len(app.sio.rooms))
 
 
 if __name__ == "__main__":
     app.add_task(update_gpu_stats())
-    app.run(host="0.0.0.0", port=8000)
+    app.run(host=config.HOST, port=config.PORT)
