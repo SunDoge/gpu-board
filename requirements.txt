@@ -1,0 +1,4 @@
+sanic
+python-socketio
+nvidia-ml-py3
+psutil
