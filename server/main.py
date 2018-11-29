@@ -24,7 +24,9 @@ async def update_gpu_stats():
         if len(sio.manager.rooms) > 0:
             gpu_stats = new_query()
             # print(gpu_stats.jsonify())
-            gpu_stats_json = ujson.dumps(gpu_stats.jsonify())
+            # gpu_stats_json = ujson.dumps(gpu_stats.jsonify())
+            gpu_stats_json = gpu_stats.jsonify()
+            gpu_stats_json['query_time'] = gpu_stats_json['query_time'].isoformat()
             await sio.emit('gpustat', gpu_stats_json)
         # print(len(app.sio.rooms))
 
