@@ -17,6 +17,8 @@ python main.py
 Add server addresses to `src/config.js`
 
 ```
+cd client
+mv src/config.js.example src/config.js
 yarn install
 yarn serve
 ```
