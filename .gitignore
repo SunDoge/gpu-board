@@ -3,3 +3,4 @@ venv/
 .idea/
 __pycache__/
 client/src/config.js
+.mypy_cache/
